@@ -1,0 +1,181 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Editing Data Files</title>
+<style type="text/css">
+.style1 {
+	font-weight: bold;
+	color: #FFFF88;
+}
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Editing Data Files<img border="0" src="../../common/empty.gif" width="1" height="15">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+
+<p class="section">For the XYZ Game System</td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">&nbsp;<p class="body">The XYZ data files include virtually all of the content from the core rulebook. However, players and GMs will often want to add their own custom material to their
+games. An integrated Editor is provided that makes this possible with relative ease.<p class="section">Editor Basics<p class="body">Before you start looking at the specifics for XYZ, you should first familiarize yourself with the basics of using
+the Editor. This includes examples of how to use the Editor to add your own custom content.
+
+<p class="body"><a href="../../../docs/redirect/kit_editor.htm">Click here</a> for more information on using the Editor with all game systems.
+
+<p class="section">Wiki Reference<p class="body">Complete details about Hero Lab data files in general will be found within the Authoring Kit Wiki. You'll find the wiki at
+<a href="http://hlkitwiki.wolflair.com/">http://hlkitwiki.wolflair.com</a>. A printed version of the wiki contents is also available through the wiki.<p class="section">Helpful Reminders<p class="body">If you're looking for a particular thing for use when
+writing a
+script, use the &quot;Find Thing...&quot; button in the upper right. This button
+will present a list of all things in the data files, which can be conveniently filtered by component
+(i.e. type of thing) to quickly find what you
+need.
+
+
+
+<p class="body">There are a variety of convenient macros defined that make it much easier to access the various fields referenced below in common ways. These macros are defined further below.<p class="section">Timing<p class="body">All tasks are scheduled during the evaluation cycle, and this cycle is broken up into phases and priorities. Each of
+the phases during the evaluation cycle utilized within these data files is summarized below. Within each phase, specific priorities that are of general importance are identified.<ul class="bullet">
+
+<li class="bullet"><font class="strong">Initialize</font><br>
+  Various core behaviors are configured
+  during this phase, as well as the fundamental enablement of mechanisms that are controlled by user-configuration settings (e.g. selection of sources). Custom content may find this phase useful in the following ways:<li class="subbullet">???<li class="bullet">
+<font class="strong">Setup</font><br>
+  This phase is used for tasks that setup configurations and/or settings, as well as for manipulating user-entered values. Custom content may find this phase useful in the following ways:<li class="subbullet">???<li class="bullet"><font class="strong">Effects</font><br>
+  The Effects phase is when we apply derived effects that influence equipment modifiers and the like. Custom content should never need to do anything during this phase.<li class="bullet"><font class="strong">PreTraits</font><br>
+  Any processing that must be performed prior to
+  the finalization of traits must be
+  handled during this phase. Custom content will find this phase useful for the following purposes:<li class="subbullet">???<li class="bullet"><font class="strong">Traits</font><br>
+  Finalization of traits
+  is performed in this phase. In general, custom content should rarely need to be performed during this phase, although the following exceptions exist:<li class="subbullet">???<li class="bullet"><font class="strong">Final</font><br>
+  This phase is where to place any last-minute
+  manipulations that must happen after everything else is wrapped up.
+
+Custom content will rarely need to be performed during this phase, but a few exceptions exist:<li class="subbullet">???<li class="bullet"><font class="strong">
+Validate</font><br>
+  Validation tests that must occur after all evaluation processing are scheduled during this phase. Custom content will rarely need to be performed during this phase, but certain situations may require it:<li class="subbullet">???<li class="bullet">
+<font class="strong">Render</font><br>
+  This phase should be limited to tasks that simply
+  render text output for display or perform last-minute validation tests that must occur after rendering is performed. All
+  manipulation should be completed prior to this phase. Custom content will rarely need to be performed during this phase, but certain exceptions exist:<li class="subbullet">???</ul>
+
+
+
+<p class="section">Content Elements <p class="body">The following is a summary of the various elements that you'll likely want to manipulate via scripts within the Savage Worlds data files. Any special details that may apply for each element are also discussed, such as key fields you'll need to reference
+and when to access the content during evaluation to ensure proper behavior.<p class="subsection">Actor<p class="body">The actor contains a number of fields that can be useful from within scripts, which are outlined below. Each of these fields can be
+accessed via the &quot;herofield[id].value&quot; syntax.<ul class="bullet">
+
+<li class="bullet"><span class="style1">???</span> - ???.</ul>
+<p class="body">Timing: <font class="strong">Final</font>  phase. <p class="subsection">Traits<p class="body">
+Traits include attributes, skills, and derived traits, as they all share a common set of fields. The key fields of traits that you'll want to access via scripts are identified below.<ul class="bullet">
+
+<li class="bullet"><span class="style1">trtBonus</span> - Tracks the various bonuses and penalties to the trait itself that are assigned by abilities, etc.<li class="bullet"><span class="style1">trtInPlay</span> - Tracks the permanent and in-play
+adjustments applied to the trait.<li class="bullet"><span class="style1">trtFinal</span> - Contains the final value for the trait, combining the user-specified value, all bonuses and penalties, and all in-play adjustments.</ul>
+<p class="body">Timing: <font class="strong">Traits</font> phase. The final trait value is calculated
+during the Traits phase. All changes to fields other than &quot;trtFinal&quot; must be made prior to the Traits phase. All uses of the &quot;trtFinal&quot;
+field must be made after the Traits phase.
+
+
+
+<p class="subsection">Resources
+
+<p class="body">Resources are used to track a variety of values and there are a few fields that need to be manipulated via scripts.<ul class="bullet">
+
+<li class="bullet"><span class="style1">resMin</span> - Contains the minimum value to which the resource can go.<li class="bullet"><span class="style1">resMax</span> - Contains the maximum value to which the resource can go.<li class="bullet">
+<span class="style1">resSpent</span> - Contains the amount of the resource that has been spent.<li class="bullet"><span class="style1">resLeft</span> - Contains the amount of the resource that remains unspent.</ul>
+
+
+
+<p class="body">Timing: <font class="strong">Traits</font> and <font class="strong">Final</font> phase. All fields other than &quot;resLeft&quot; must be modified prior to the Traits phase. The value of &quot;resLeft&quot; is calculated at a priority of Final/2000, after
+which is can be referenced.<p class="subsection">Trackers<p class="body">Trackers are used to manage a variety of values and there are a few fields that need to be manipulated via scripts.<ul class="bullet">
+
+<li class="bullet"><span class="style1">trkMin</span> - Contains the minimum value to which the tracker can go.<li class="bullet"><span class="style1">trkMax</span> - Contains the maximum value to which the tracker can go.<li class="bullet">
+<span class="style1">trkLeft</span> - Contains the amount of tracker that remains unspent.</ul>
+
+
+
+<p class="body">Timing: <font class="strong">Traits</font> and <font class="strong">Final</font> phase. All fields other than &quot;trkLeft&quot; must be modified prior to the Traits phase. The value of &quot;trkLeft&quot; is calculated at a priority of Final/1000, after
+which is can be referenced.<p class="subsection">Abilities<p class="body">Abilities possess a few fields that are of importance when writing scripts.<ul class="bullet">
+
+<li class="bullet"><span class="style1">abilActive</span> - Indicates whether the effects of the ability have been activated or not by the user. If non-zero, the effects are active and should be applied.</ul>
+<p class="body">Timing: These fields are established by user behaviors and must be treated as read-only throughout the evaluation cycle.
+
+
+
+<p class="section">Useful Tags<p class="body">The XYZ data files use a variety of tags to orchestrate all the mechanisms needed. Many of these tags may be of use when
+adding your own custom content. These tag groups and/or tags are outlined in the sections below. Additional tags are used throughout the XYZ files, but these are the tags of greatest interest when adding custom content. In all cases, the syntax given is &quot;groupid.tagid&quot;.<p class="subsection">
+Hero Tags<p class="body">There are a number of important tags that will only be found on the character. By convention, these tags belong to the &quot;Hero&quot; tag group.
+
+<ul class="bullet">
+
+<li class="bullet"><span class="style1">Hero.???</span> - Indicates ???.</ul>
+<p class="subsection">Helper Tags<p class="body">Tags are used extensively to indicate the state of content elements, such as whether an ability is activated or whether a pre-requisite has been satisfied.&nbsp; Such tags are generally referred to as &quot;Helper&quot;
+tags. The following are the ones you'll find useful when adding your own content.<ul class="bullet">
+
+<li class="bullet"><span class="style1">Helper.Bootstrap</span> - When assigned to a thing, that thing is automatically bootstrapped to every new actor. This is useful when you want to attach a new behavior to every actor.<li class="bullet">
+<span class="style1">Helper.Maximum</span> - When assigned to a trait, this indicates the trait is at its maximum and can no longer be advanced.<li class="bullet"><span class="style1">Helper.Minimum</span> - When assigned to a trait, this indicates the
+traits is at its minimum and can no longer be decreased.<li class="bullet"><span class="style1">Helper.Activated</span> - Indicates an in-play adjustment or ability for which the effects have been activated.<li class="bullet"><span class="style1">
+Helper.BadStrReq</span> - Indicates a weapon for which the minimum strength requirement is not satisfied.<li class="bullet"><span class="style1">Helper.ResetMax</span> - When assigned to a tracker, indicates the reset value is the tracker maximum instead
+of the minimum.<li class="bullet"><span class="style1">Helper.NoReset</span> - When assigned to a tracker, indicates that there is no reset behavior for the tracker.<li class="bullet"><span class="style1">Helper.NoMaxBound</span> - When assigned to a
+tracker, indicates that the user value can go above the tracker maximum value.<li class="bullet"><span class="style1">Helper.NoMinBound</span> - When assigned to a tracker, indicates that the user value can go below the tracker minimum value.<li class="bullet">
+<span class="style1">Helper.NoMinimum</span> - When assigned to a resource, indicates that the resource does not need to be fully spent to avoid reporting a warning.</ul>
+<p class="subsection">Identity Tags<p class="body">The XYZ data files make use of numerous Identity tags. In all cases, identity tags apply to an entire tag group and that group is associated with one or more types of game element. The tags for
+the group are automatically created by Hero Lab, with one tag defined for every thing of the specified type created by the data files. Each identity tag will have the same unique id and name as the thing it is based upon. For example, if the &quot;Armor&quot;
+identity tag group is created and associated with all armor equipment, a separate tag is created for every piece of armor, with the id and name of the tag being identical to the original armor it derives from.</p>
+<p class="body">There are a few identity tags that are important when adding your own custom content. They are valuable because identity tags allow Hero Lab to automatically adapt to new material as you add it (since corresponding tags are automatically
+defined). The identity tags you'll most likely have a use for are outlined below. </p>
+<ul class="bullet">
+
+<li class="bullet"><span class="style1">Attribute.?</span> - Every attribute is
+assigned an &quot;Attribute&quot; tag, which can be used to identify specific attributes.<li class="bullet"><span class="style1">Skill.?</span> - Every skill is assigned a &quot;Skill&quot; tag, which can be used to identify specific skills.</ul>
+<p class="subsection">Miscellaneous Tags<p class="body">There are a number of miscellaneous tags that belong to various tag groups and may be of importance when writing scripts to utilize custom content. These are outlined below.<ul class="bullet">
+
+<li class="bullet"><span class="style1">Equipped.Equipped</span> - When assigned to a weapon or armor, indicates that the equipment is currently equipped for the character.</ul>
+<p class="section">Convenient Macros<p class="body">For the convenience of data file authors, the Savage
+Worlds data files define a number of macros that can be used as &quot;shorthand&quot; within scripts. These macros simplify the code you have to write to make scripts accomplish their goal. Descriptions for each macro are provided below.<ul class="bullet">
+
+<li class="bullet"><font class="strong">#trait[<i>trait_id</i>]</font>
+
+  <p class="body">Accesses the &quot;trtFinal&quot; field of the trait with the specified unique id given by &quot;trait_id&quot;. For example, to access the &quot;trtFinal&quot; field on the
+&quot;Strength&quot; attribute, the syntax would be &quot;#trait[attrStr]&quot;.<p class="body">Equivalent to: hero.child[<i>trait_id</i>].field[trtFinal].value<li class="bullet"><font class="strong">#traitfound[<i>trait_id</i>]</font>
+
+  <p class="body">Accesses the &quot;trtFinal&quot; field of the trait with the specified unique id given by &quot;trait_id&quot;. For example, to access the &quot;trtFinal&quot; field on the &quot;Strength&quot; attribute, the syntax would be &quot;#traitfound[attrStr]&quot;. If the trait does not exist
+	within the hero, such as when referencing skills that a hero may or may not possess, a value of zero is returned instead of an error being reported.<p class="body">Equivalent to: hero.childfound[<i>trait_id</i>].field[trtFinal].value<li class="bullet">
+<font class="strong">#traitbonus[<i>trait_id</i>]</font>
+
+  <p class="body">Accesses the &quot;trtBonus&quot; field of the trait with the specified unique id given by &quot;trait_id&quot;. For example, to access the &quot;trtBonus&quot; field on the
+&quot;Strength&quot; attribute, the syntax would be &quot;#traitbonus[attrStr]&quot;.<p class="body">Equivalent to: hero.child[<i>trait_id</i>].field[trtBonus].value<li class="bullet"><font class="strong">#traitinplay[<i>trait_id</i>]</font>
+
+  <p class="body">Accesses the &quot;trtInPlay&quot; field of the trait with the specified unique id given by &quot;trait_id&quot;. For example, to access the &quot;trtInPlay&quot; field on the
+&quot;Strength&quot; attribute, the syntax would be &quot;#traitinplay[attrStr]&quot;.<p class="body">Equivalent to: hero.child[<i>trait_id</i>].field[trtInPlay].value<li class="bullet"><font class="strong">#resmax[<i>res_id</i>]</font>
+
+<p class="body">Accesses the &quot;resMax&quot; field of the resource specified by <i>res_id</i>. For example, to get the number of ability slots the character possesses, the syntax would be &quot;#resmax[resAbility]&quot;.
+<p class="body">Equivalent to: hero.child[<i>res_id</i>].field[resMax].value<li class="bullet"><font class="strong">#trkmax[<i>trk_id</i>]</font>
+
+  <p class="body">Accesses the &quot;trkMax&quot; field of the tracker specified by
+  <i>trk_id</i>. For example, to get the maximum number of power points that the character receives, the syntax would be &quot;#trkmax[trkPower]&quot;.<p class="body">Equivalent to: hero.child[<i>trk_id</i>].field[trkMax].value
+
+
+</ul>
+<p class="body">&nbsp;
+
+</body>
+
+</html>

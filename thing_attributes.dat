@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file contains the assortment of attributes possessed by every actor for the
+      game system. The display order of attributes is controlled via the assignment of
+      an "explicit" tag with the relative position of each.
+-->
+
+<document signature="Hero Lab Data">
+
+  <!-- Sample Attribute
+  -->
+  <thing
+    id="attrSam"
+    name="Sample"
+    compset="Attribute"
+    isunique="yes"
+    description="Description goes here">
+    <fieldval field="trtAbbrev" value="Sam"/>
+    <tag group="explicit" tag="1"/>
+    </thing>
+
+  <!-- Strength Attribute
+        NOTE! We include the Strength attribute because the minimum strength
+              requirement mechanisms for weapons and armor rely upon it.
+  -->
+  <thing
+    id="attrStr"
+    name="Strength"
+    compset="Attribute"
+    isunique="yes"
+    description="Description goes here">
+    <fieldval field="trtAbbrev" value="Str"/>
+    <tag group="explicit" tag="2"/>
+    </thing>
+
+  </document>

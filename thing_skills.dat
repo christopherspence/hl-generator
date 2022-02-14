@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file contains the assortment of skills for the game system. Note that each
+      skill is linked to an associated attribute for the character. This linkage allows
+      the value of the skill to easily incorporate the effects of the linked attribute
+      via a script on the component.
+-->
+
+<document signature="Hero Lab Data">
+
+  <!-- Sample Skill -->
+  <thing
+    id="skSample"
+    name="Sample"
+    compset="Skill"
+    isunique="yes"
+    description="Description goes here">
+    <fieldval field="trtAbbrev" value="Sam"/>
+
+    <!-- If this skill should be shown as an out-of-combat skill on the TacCon, assign this tag
+    <tag group="DashTacCon" tag="NonCombat"/>
+    -->
+
+    <!-- Specify the attribute to which this skill is linked -->
+    <link linkage="attribute" thing="attrSam"/>
+    </thing>
+
+  <!-- Melee Skill
+        NOTE! This skill is included because melee weapons rely on it to calculate
+              attack values.
+  -->
+  <thing
+    id="skMelee"
+    name="Melee"
+    compset="Skill"
+    isunique="yes"
+    description="Description goes here">
+    <fieldval field="trtAbbrev" value="Mel"/>
+    <link linkage="attribute" thing="attrSam"/>
+    </thing>
+
+  <!-- Shooting Skill
+        NOTE! This skill is included because ranged weapons rely on it to calculate
+              attack values.
+  -->
+  <thing
+    id="skShooting"
+    name="Shooting"
+    compset="Skill"
+    isunique="yes"
+    description="Description goes here">
+    <fieldval field="trtAbbrev" value="Sht"/>
+    <link linkage="attribute" thing="attrSam"/>
+    </thing>
+
+
+  </document>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file contains the assortment of races for the game system. The special
+      advantages of each race are conferred through a combination of scripts and
+      automatic assignment of special abilities. All special abilities are assigned
+      via the bootstrapping of the ability, resulting in the ability being
+      automatically assigned to the actor whenever the race is selected. If an ability
+      is both user-selected AND conferred by a race, the ability only appears a single
+      time because it all abilities are "unique".
+-->
+
+<document signature="Hero Lab Data">
+
+  <!-- Sample Race -->
+  <thing
+    id="racSample"
+    name="Sample"
+    compset="Race"
+    isunique="yes"
+    description="Description goes here">
+
+    <!-- If the race confers any special abilities, bootstrap them here
+    <bootstrap thing="abSample"/>
+    -->
+
+    <!-- Define any script needed to apply changes to traits or other mechanisms
+    <eval value="1" phase="PreTraits" priority="5000">
+      <before name="Calc trtFinal"/><![CDATA[
+      ~apply whatever adjustment(s) are needed here
+      ~hero.child[resAbility].field[resMax].value += 1
+      ~#traitbonus[attrSam] += 1
+      ]]></eval>
+    -->
+
+    </thing>
+
+
+  </document>

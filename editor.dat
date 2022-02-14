@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file contains the definitions of how the Editor should handle all the
+      various publicly accessible objects (i.e. component sets) within the game
+      system. A separate "editthing" elemenet is defined for each component set,
+      along with the appropriate details for how to configure each facet via
+      "inputthing" elements.
+-->
+
+<document signature="Hero Lab Data">
+
+
+  <!-- Attribute editthing -->
+  <editthing
+    compset="Attribute"
+    name="Attribute"
+    prefix="attr"
+    description="Attributes are incredibly simple. They have a minimum and maximum value.{br}They also have an optional short name and/or abbreviation."
+    summary="Defines an Attribute upon which starting CPs can be spent by a character.">
+    <inputthing
+      name="Minimum Value"
+      helptext="Specify the minimum rating for the attribute (default is 0).">
+      <it_field field="trtMinimum"/>
+      </inputthing>
+    <inputthing
+      name="Maximum Value"
+      helptext="Specify the maximum rating for the attribute (default is 10).">
+      <it_field field="trtMaximum"/>
+      </inputthing>
+    <inputthing
+      name="Abbreviation"
+      helptext="Specify a very short abbreviation for use in displaying the attribute via its abbreviation (max 5 characters).">
+      <it_field field="trtAbbrev"/>
+      </inputthing>
+    </editthing>
+
+
+  <!-- Skill editthing -->
+  <editthing
+    compset="Skill"
+    name="Skill"
+    prefix="sk"
+    description="As basic traits, Skills have a minimum and maximum value, as well as{br}an optional short name and/or abbreviation."
+    summary="Defines a Skill upon which starting CPs can be spent by a character.">
+    <inputthing
+      name="Minimum Value"
+      helptext="Specify the minimum rating for the skill (default is 0).">
+      <it_field field="trtMinimum"/>
+      </inputthing>
+    <inputthing
+      name="Maximum Value"
+      helptext="Specify the maximum rating for the skill(default is 10).">
+      <it_field field="trtMaximum"/>
+      </inputthing>
+    <inputthing
+      name="Abbreviation"
+      helptext="Specify a very short abbreviation for use in displaying the skill via its abbreviation (max 5 characters).">
+      <it_field field="trtAbbrev"/>
+      </inputthing>
+    <inputthing
+      name="Linked Attribute for Skill"
+      helptext="Select the attribute used to calculate the dice pool for this skill.">
+      <it_linkage compset="Attribute" linkage="attribute"/>
+      </inputthing>
+    </editthing>
+
+
+  <!-- Ability editthing -->
+  <editthing
+    compset="Ability"
+    name="Abilities"
+    prefix="ab"
+    description="As basic traits, special abilities have various characteristics that are not currently used.{br}They also have an optional custom name for display on the Special tab."
+    summary="Defines a Special Ability upon which starting CPs can be spent by a character.">
+    <inputthing
+      name="Name for Special Tab"
+      helptext="Specify an optional custom name to be used on the Special tab.">
+      <it_field field="spcName"/>
+      </inputthing>
+    <inputthing
+      name="Hide from User?"
+      helptext="Specify whether this special ability is hidden from direct user selection (e.g. Flight is only conferred by the Avian race).">
+      <it_tagcheck group="Hide" tag="Ability"/>
+      </inputthing>
+    <inputthing
+      name="Activated by User?"
+      helptext="Specify whether this special ability can be activated by the user via the In-Play tab.">
+      <it_tagcheck group="User" tag="Activation"/>
+      </inputthing>
+    <inputthing
+      name="Creation Only?"
+      helptext="Specify whether this special ability can only be selected for a character during creation.">
+      <it_tagcheck group="User" tag="CreateOnly"/>
+      </inputthing>
+<!-- These facets of special abilities are not currently used for anything so they are commented out.
+    <inputthing
+      name="Minimum Value"
+      helptext="Specify the minimum rating for the special ability (default is 0).">
+      <it_field field="trtMinimum"/>
+      </inputthing>
+    <inputthing
+      name="Maximum Value"
+      helptext="Specify the maximum rating for the skill(default is 10).">
+      <it_field field="trtMaximum"/>
+      </inputthing>
+    <inputthing
+      name="Abbreviation"
+      helptext="Specify a very short abbreviation for use in displaying the skill via its abbreviation (max 5 characters).">
+      <it_field field="trtAbbrev"/>
+      </inputthing>
+-->
+    </editthing>
+
+
+  <!-- Race editthing -->
+  <editthing
+    compset="Race"
+    name="Race"
+    prefix="rac"
+    description="Races have no special fields - only a name. If a race confers an ability,{br}create it as a special ability and bootstrap it from the race."
+    summary="Defines a Race that can be selected by a character.">
+    </editthing>
+
+
+  <!-- Equipment editthing - for basic gear -->
+  <editthing
+    compset="Equipment"
+    name="Equipment"
+    prefix="eq"
+    description="Weapons, armor, and vehicles all have their own tabs for creating objects of those types."
+    summary="Defines a simple piece of equipment that can be selected on the Gear tab.">
+    <inputthing
+      name="Cost"
+      helptext="Specify the standard cost of the item, with a value of 0 meaning it is free.">
+      <it_field field="grCost"/>
+      </inputthing>
+    <inputthing
+      name="Lot Cost"
+      helptext="Specify the cost of a full 'lot' of the item, where the lot size is given on the right. The 'lot cost' overrides any individual cost given above.">
+      <it_field field="grLotCost"/>
+      </inputthing>
+    <inputthing
+      name="Weight"
+      helptext="Specify the weight of the item.">
+      <it_field field="gearWeight"/>
+      </inputthing>
+    <inputthing
+      name="Container Behavior"
+      helptext="Specify whether this piece of equipment can contain other equipment. If this equipment can contain other equipment AND be contained within other equipment, select 'Holder'. If the equipment can only contain other equipment, select 'Top Holder'. If the equipment can only be contained by other equipment, do not select anything.">
+      <it_tagpick group="thing" tag="holder?" />
+      </inputthing>
+    </editthing>
+
+
+  <!-- Ammunition editthing - for ammunition -->
+  <editthing
+    compset="Ammunition"
+    name="Ammunition"
+    prefix="eq"
+    description="Weapons, armor, and vehicles all have their own tabs for creating objects of those types."
+    summary="Defines a type of weapon ammunition that can be selected on the Gear tab.">
+    <inputthing
+      name="Cost"
+      helptext="Specify the standard cost of the item, with a value of 0 meaning it is free.">
+      <it_field field="grCost"/>
+      </inputthing>
+    <inputthing
+      name="Lot Cost"
+      helptext="Specify the cost of a full 'lot' of the item, where the lot size is given on the right. The 'lot cost' overrides any individual cost given above.">
+      <it_field field="grLotCost"/>
+      </inputthing>
+    <inputthing
+      name="Weight"
+      helptext="Specify the weight of the item.">
+      <it_field field="gearWeight"/>
+      </inputthing>
+    </editthing>
+
+
+  <!-- Melee editthing - for melee weapons -->
+  <editthing
+    compset="Melee"
+    name="Melee Weapon"
+    prefix="wp"
+    description="Armor, vehicles, and simple equipment all have their own tabs for creating objects of those types."
+    summary="Defines a melee weapon that can be selected on the Armory tab.">
+    <inputthing
+      name="Weapon Bonus"
+      helptext="Specify the attack bonus of the weapon.">
+      <it_field field="wpBonus"/>
+      </inputthing>
+    <inputthing
+      name="Weapon Damage"
+      helptext="Specify the damage rating of the weapon.">
+      <it_field field="wpDamage"/>
+      </inputthing>
+    <inputthing
+      name="Minimum Strength"
+      helptext="Specify the minimum Strength required to use the weapon without penalty.">
+      <it_field field="wpStrReq"/>
+      </inputthing>
+    <inputthing
+      name="Cost"
+      helptext="Specify the standard cost of the item, with a value of 0 meaning it is free.">
+      <it_field field="grCost"/>
+      </inputthing>
+    <inputthing
+      name="Weight"
+      helptext="Specify the weight of the item.">
+      <it_field field="gearWeight"/>
+      </inputthing>
+    <inputthing
+      name="Special Behaviors"
+      helptext="Specify any special behaviors for the weapon of which the user should be reminded.">
+      <it_field field="wpSpecial"/>
+      </inputthing>
+    <inputthing
+      name="Natural Attack?"
+      helptext="Specify whether this weapon should be treated as a natural attack.">
+      <it_tagcheck group="Equipment" tag="Natural"/>
+      </inputthing>
+    <inputthing
+      name="Two-Handed Weapon?"
+      helptext="Specify whether this weapon is two-handed.">
+      <it_tagcheck group="Equipment" tag="TwoHand"/>
+      </inputthing>
+    </editthing>
+
+
+  <!-- Ranged editthing - for ranged weapons -->
+  <editthing
+    compset="Ranged"
+    name="Ranged Weapon"
+    prefix="wp"
+    description="Armor, vehicles, and simple equipment all have their own tabs for creating objects of those types."
+    summary="Defines a ranged weapon that can be selected on the Armory tab.">
+    <inputthing
+      name="Weapon Bonus"
+      helptext="Specify the attack bonus of the weapon.">
+      <it_field field="wpBonus"/>
+      </inputthing>
+    <inputthing
+      name="Weapon Damage"
+      helptext="Specify the damage rating of the weapon.">
+      <it_field field="wpDamage"/>
+      </inputthing>
+    <inputthing
+      name="Short Range"
+      helptext="Specify the short range distance of the weapon.">
+      <it_field field="wpShort"/>
+      </inputthing>
+    <inputthing
+      name="Medium Range"
+      helptext="Specify the medium range distance of the weapon.">
+      <it_field field="wpMedium"/>
+      </inputthing>
+    <inputthing
+      name="Long Range"
+      helptext="Specify the long range distance of the weapon.">
+      <it_field field="wpLong"/>
+      </inputthing>
+    <inputthing
+      name="Minimum Strength"
+      helptext="Specify the minimum Strength required to use the weapon without penalty.">
+      <it_field field="wpStrReq"/>
+      </inputthing>
+    <inputthing
+      name="Cost"
+      helptext="Specify the standard cost of the item, with a value of 0 meaning it is free.">
+      <it_field field="grCost"/>
+      </inputthing>
+    <inputthing
+      name="Weight"
+      helptext="Specify the weight of the item.">
+      <it_field field="gearWeight"/>
+      </inputthing>
+    <inputthing
+      name="Special Behaviors"
+      helptext="Specify any special behaviors for the weapon of which the user should be reminded.">
+      <it_field field="wpSpecial"/>
+      </inputthing>
+    <inputthing
+      name="Natural Attack?"
+      helptext="Specify whether this weapon should be treated as a natural attack.">
+      <it_tagcheck group="Equipment" tag="Natural"/>
+      </inputthing>
+    <inputthing
+      name="Two-Handed Weapon?"
+      helptext="Specify whether this weapon is two-handed.">
+      <it_tagcheck group="Equipment" tag="TwoHand"/>
+      </inputthing>
+    </editthing>
+
+
+  <!-- Armor editthing -->
+  <editthing
+    compset="Armor"
+    name="Armor"
+    prefix="arm"
+    description="Weapons, vehicles, and simple equipment all have their own tabs for creating objects of those types."
+    summary="Defines armor that can be selected on the Armory tab.">
+    <inputthing
+      name="Defense Rating"
+      helptext="Specify the Defense rating of the armor against attacks.">
+      <it_field field="defDefense"/>
+      </inputthing>
+    <inputthing
+      name="Minimum Strength"
+      helptext="Specify the minimum Strength required to use the armor successfully.">
+      <it_field field="defStrReq"/>
+      </inputthing>
+    <inputthing
+      name="Cost"
+      helptext="Specify the standard cost of the item, with a value of 0 meaning it is free.">
+      <it_field field="grCost"/>
+      </inputthing>
+    <inputthing
+      name="Weight"
+      helptext="Specify the weight of the item.">
+      <it_field field="gearWeight"/>
+      </inputthing>
+    </editthing>
+
+
+  <!-- Shield editthing -->
+  <editthing
+    compset="Shield"
+    name="Shield"
+    prefix="shd"
+    description="Weapons, vehicles, and simple equipment all have their own tabs for creating objects of those types."
+    summary="Defines a shield that can be selected on the Armory tab.">
+    <inputthing
+      name="Defense Rating"
+      helptext="Specify the Defense rating of the armor against attacks.">
+      <it_field field="defDefense"/>
+      </inputthing>
+    <inputthing
+      name="Minimum Strength"
+      helptext="Specify the minimum Strength required to use the armor successfully.">
+      <it_field field="defStrReq"/>
+      </inputthing>
+    <inputthing
+      name="Cost"
+      helptext="Specify the standard cost of the item, with a value of 0 meaning it is free.">
+      <it_field field="grCost"/>
+      </inputthing>
+    <inputthing
+      name="Weight"
+      helptext="Specify the weight of the item.">
+      <it_field field="gearWeight"/>
+      </inputthing>
+    </editthing>
+
+
+  <!-- Mechanics editthing -->
+  <editthing
+    compset="Mechanics"
+    name="Mechanic"
+    description="A mechanics thing will be automatically added to every character to apply its effects. There is no built-in logic for mechanics,{br}as they provide a means for the user to customize everything to work as he chooses. As such, there are no fields and{br}everything is assumed to be done through scripts."
+    summary="Defines a set of custom behaviors that are defined by the user and applied to each character.">
+    </editthing>
+
+
+  </document>
